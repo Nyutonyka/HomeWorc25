@@ -1,4 +1,4 @@
-package com.hillel.homeWork11;
+package com.hillel.homeWork12;
 
 public interface Collection {
 

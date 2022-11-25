@@ -1,24 +1,24 @@
-package com.hillel.homeWork11;
+package com.hillel.homeWork12;
 
 public class AppMyArrayList {
 
     public static void main(String[] args) {
         MyArrayList1 my = new MyArrayList1();
-        MyArrayList1 my1 = new MyArrayList1(6);
 
         System.out.println(my.add("A"));
         System.out.println(my);
         my.add("B");
         my.add("C");
+        my.add("G");
         System.out.println(my);
         my.add(1, "D");
         my.add(4, "F");
         System.out.println(my);
         my.add("E");
-        my.add("G");
+        System.out.println(my.add("A"));
+        System.out.println(my);
 
-        my1.add("A");
-        System.out.println(my1);
+        System.out.println(my.get(0).equals(my.get(7)));
 
         my.delete("A");
         my.delete("G");
@@ -27,15 +27,11 @@ public class AppMyArrayList {
         System.out.println(my.get(1));
 
         System.out.println(my.contain("E"));
-        System.out.println(my.contain("B"));
-        System.out.println(my.equals(my1));
+        System.out.println(my.contain("G"));
 
         my.clear();
 
-        my.add("A");
-
         System.out.println(my);
-        System.out.println(my1);
-        System.out.println(my.equals(my1));
+
     }
 }
