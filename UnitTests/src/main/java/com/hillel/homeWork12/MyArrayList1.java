@@ -2,9 +2,6 @@ package com.hillel.homeWork12;
 
 import java.util.Arrays;
 
-import static java.lang.System.arraycopy;
-
-
 public class MyArrayList1 implements Collection{
 
     private static String[] elementData;
@@ -136,18 +133,18 @@ private void countBusyCells(String[] elementData) {
     private void addOneCell(int index) {
         String[] newArray;
         newArray = new String[elementData.length + 1];
-        arraycopy(elementData, 0, newArray, 0, elementData.length);
+        System.arraycopy(elementData, 0, newArray, 0, elementData.length);
         elementData = new String[newArray.length];
-        arraycopy(newArray, 0, elementData, 0, newArray.length);
-        arraycopy(newArray, index, elementData, index + 1, elementData.length - (index + 1));
+        System.arraycopy(newArray, 0, elementData, 0, newArray.length);
+        System.arraycopy(newArray, index, elementData, index + 1, elementData.length - (index + 1));
         countBusyCells(elementData);
     }
 
     private void deleteOneCell(int index) {
         String[] newArray;
         newArray = new String[elementData.length];
-        arraycopy(elementData, 0, newArray, 0, elementData.length);
-        arraycopy(newArray, index + 1, elementData, index, elementData.length - (index + 1));
+        System.arraycopy(elementData, 0, newArray, 0, elementData.length);
+        System.arraycopy(newArray, index + 1, elementData, index, elementData.length - (index + 1));
         elementData[elementData.length -1] = null;
     }
 
