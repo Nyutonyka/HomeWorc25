@@ -1,4 +1,4 @@
-package homeWork13;
+package com.homework.homeWork13;
 
 // Имеется коллекция из Integes, использую стримы
 // посчитать среденее значения всех чисел
@@ -19,9 +19,9 @@ public class StreamAverage {
 
         System.out.println(number);
 
-        OptionalDouble stream = number.stream().mapToInt(e -> e).average();
-        if (stream.isPresent()) {
-            System.out.print(stream.getAsDouble());
+        OptionalDouble streamAverage = number.stream().mapToInt(e -> e).average();
+        if (streamAverage.isPresent()) {
+            System.out.print(streamAverage.getAsDouble());
         }
     }
 }

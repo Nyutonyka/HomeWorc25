@@ -1,4 +1,4 @@
-package homeWork9;
+package com.homework.homeWork9;
 
 import java.util.Objects;
 

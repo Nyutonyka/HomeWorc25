@@ -1,4 +1,4 @@
-package homeWork10;
+package com.homework.homeWork10;
 //
 //import java.util.ArrayList;
 //import java.util.ConcurrentModificationException;

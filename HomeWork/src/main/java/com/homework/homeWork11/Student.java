@@ -1,4 +1,4 @@
-package homeWork11;
+package com.homework.homeWork11;
 
 import lombok.*;
 import lombok.experimental.Accessors;

@@ -1,4 +1,4 @@
-package homeWork9;
+package com.homework.homeWork9;
 
 public interface CustomCollection {
 

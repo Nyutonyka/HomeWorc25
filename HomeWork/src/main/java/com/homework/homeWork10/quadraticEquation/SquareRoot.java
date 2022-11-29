@@ -1,4 +1,4 @@
-package homeWork10.quadraticEquation;
+package com.homework.homeWork10.quadraticEquation;
 
 import java.util.Scanner;
 

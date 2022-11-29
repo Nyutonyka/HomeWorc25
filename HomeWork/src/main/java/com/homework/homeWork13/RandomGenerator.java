@@ -1,4 +1,4 @@
-package homeWork13;
+package com.homework.homeWork13;
 
 public class RandomGenerator {
 
