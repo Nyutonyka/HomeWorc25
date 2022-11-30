@@ -18,11 +18,12 @@ public class StreamAverage {
             number.add(RandomGenerator.getIntValue(50));
 
         System.out.println(number);
+        OptionalDouble sA = streamAverage(number);
+        System.out.println(sA);
+    }
 
-        OptionalDouble streamAverage = number.stream().mapToInt(e -> e).average();
-        if (streamAverage.isPresent()) {
-            System.out.print(streamAverage.getAsDouble());
-        }
+    public static OptionalDouble streamAverage(List<Integer> number){
+        return number.stream().mapToInt(e -> e).average();
     }
 }
 
