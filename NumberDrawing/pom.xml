@@ -7,6 +7,7 @@
     <groupId>com.hillel</groupId>
     <artifactId>NumberDrawing</artifactId>
     <version>1.0</version>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>18</maven.compiler.source>
