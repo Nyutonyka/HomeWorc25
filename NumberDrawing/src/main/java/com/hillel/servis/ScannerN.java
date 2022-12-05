@@ -6,7 +6,7 @@ public class ScannerN {
 
     public static String inputNumber(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter 7 digits...");
+        System.out.println("Enter digits...");
         String lineNumber = null;
         try {
             lineNumber = sc.nextLine();
