@@ -1,7 +1,20 @@
 package com.hillel.dto;
 
-public enum Signs {
-    STONE,
-    SCISSORS,
-    PAPER
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+@Data
+@Accessors(chain = true)
+public class Signs {
+
+    private final Symbol signs;
+
+    @Override
+    public String toString() {
+        return String.format("%s", signs.getSymbol());
+    }
+
+    public int getIndex(){
+        return signs.getIndex();
+    }
 }

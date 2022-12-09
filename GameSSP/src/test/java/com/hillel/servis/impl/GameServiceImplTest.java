@@ -1,0 +1,69 @@
+package com.hillel.servis.impl;
+
+import com.hillel.dto.Computer;
+import com.hillel.dto.Player;
+import com.hillel.dto.Game;
+import com.hillel.servis.GameService;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class GameServiceImplTest {
+
+    @Test
+    void startGame() {
+        Player pl = new Player().setName(("pl_1"));
+        Computer cm = new Computer();
+        GameService gs = new GameServiceImpl();
+        Game game = gs.startGame(pl, cm);
+
+        assertNotNull(game);
+        assertNotNull(game.getPlayer());
+        assertNotNull(game.getComputer());
+        //assertNotNull(game.getHand());
+       // assertEquals(52, game.getHandSigns().size());
+    }
+
+    @Test
+    void userHand() {
+        Player pl = new Player().setName(("pl_1"));
+        Computer cm = new Computer();
+        GameService gs = new GameServiceImpl();
+        Game game = gs.startGame(pl, cm);
+
+        gs.playerHand(game);
+    }
+
+    @Test
+    void playerHand() {
+        Player pl = new Player().setName(("pl_1"));
+        Computer cm = new Computer();
+        GameService gs = new GameServiceImpl();
+        Game game = gs.startGame(pl, cm);
+        gs.playerHand(game);
+
+    }
+
+    @Test
+    void computerHand() {
+        Computer cm = new Computer();
+        Player pl = new Player();
+        GameService gs = new GameServiceImpl();
+        Game game = gs.startGame(pl, cm);
+        gs.computerHand(game);
+    }
+
+    @Test
+    void showWinner() {
+        Computer cm = new Computer();
+        Player pl = new Player();
+        GameService gs = new GameServiceImpl();
+        Game game = gs.startGame(pl, cm);
+
+        gs.showWinner(game);
+        assertEquals(1, game.getPlayer().getNumberOfGamesPlayed());
+        gs.showWinner(game);
+        assertEquals(2, game.getPlayer().getNumberOfGamesPlayed());
+
+    }
+}
