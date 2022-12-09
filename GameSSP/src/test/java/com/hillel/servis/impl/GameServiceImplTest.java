@@ -7,6 +7,7 @@ import com.hillel.servis.GameService;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class GameServiceImplTest {
 
@@ -20,18 +21,8 @@ class GameServiceImplTest {
         assertNotNull(game);
         assertNotNull(game.getPlayer());
         assertNotNull(game.getComputer());
-        //assertNotNull(game.getHand());
-       // assertEquals(52, game.getHandSigns().size());
-    }
-
-    @Test
-    void userHand() {
-        Player pl = new Player().setName(("pl_1"));
-        Computer cm = new Computer();
-        GameService gs = new GameServiceImpl();
-        Game game = gs.startGame(pl, cm);
-
-        gs.playerHand(game);
+        assertNotNull(game.getChanOfSigns());
+        assertEquals(3, game.getChanOfSigns().size());
     }
 
     @Test
@@ -40,8 +31,10 @@ class GameServiceImplTest {
         Computer cm = new Computer();
         GameService gs = new GameServiceImpl();
         Game game = gs.startGame(pl, cm);
-        gs.playerHand(game);
+        int i = gs.playerHand(game);
 
+        assertNotNull(i);
+        assertTrue(i >= 1 && i <= 3);
     }
 
     @Test
@@ -50,7 +43,10 @@ class GameServiceImplTest {
         Player pl = new Player();
         GameService gs = new GameServiceImpl();
         Game game = gs.startGame(pl, cm);
-        gs.computerHand(game);
+        int i = gs.computerHand(game);
+
+        assertNotNull(i);
+        assertTrue(i >= 1 && i <= 3);
     }
 
     @Test
@@ -64,6 +60,5 @@ class GameServiceImplTest {
         assertEquals(1, game.getPlayer().getNumberOfGamesPlayed());
         gs.showWinner(game);
         assertEquals(2, game.getPlayer().getNumberOfGamesPlayed());
-
     }
 }

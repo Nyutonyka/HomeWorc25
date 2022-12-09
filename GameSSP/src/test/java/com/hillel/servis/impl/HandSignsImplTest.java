@@ -11,14 +11,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class HandSignsImplTest {
 
     @Test
-    void getHand() {
-
-    }
-
-    @Test
     void chainOfSigns() {
         HandSigns hs = new HandSignsImpl();
         Stack<Signs> handSign = hs.chainOfSigns();
+
         assertFalse(handSign.isEmpty());
         assertEquals(3, handSign.size());
     }
