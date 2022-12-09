@@ -1,3 +1,5 @@
+package com.hillel;
+
 import java.util.Scanner;
 
 import com.hillel.dto.*;
