@@ -1,0 +1,4 @@
+Player : Ann. Total games 3: 
+win 2 
+lost 1 
+draw 0
