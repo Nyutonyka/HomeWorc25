@@ -1,5 +1,8 @@
 package com.hillel;
-
+/*
+ * @author Anna Babich
+ * @version 1.0.0
+ */
 import java.util.Scanner;
 
 import com.hillel.dto.*;
