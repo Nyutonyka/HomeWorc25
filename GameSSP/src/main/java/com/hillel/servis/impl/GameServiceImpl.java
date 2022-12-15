@@ -73,7 +73,7 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public String showResult(Game game) {
-        return String.format("Player : %s. \nTotal games %s: \nwin - %s \nlost - %s \ndraw - %s",
+        return String.format("Player : %s. Total games %s: win - %s lost - %s draw - %s\n",
                 game.getPlayer().getName(),
                 game.getPlayer().getNumberOfGamesPlayed(),
                 game.getPlayer().getNumberOfWins(),

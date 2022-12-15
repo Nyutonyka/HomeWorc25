@@ -1,0 +1,2 @@
+Player : B. Total games 5: win - 3 lost - 2 draw - 0
+Player : B. Total games 2: win - 0 lost - 0 draw - 2

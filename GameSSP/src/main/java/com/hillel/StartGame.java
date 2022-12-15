@@ -3,10 +3,7 @@ package com.hillel;
  * @author Anna Babich
  * @version 1.0.0
  */
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
+import java.io.*;
 import java.util.Scanner;
 
 import com.hillel.dto.*;
@@ -39,15 +36,13 @@ public class StartGame {
             nextGame = cs.nextLine();
         } while (nextGame.equalsIgnoreCase("y"));
 
-        System.out.println(gs.showResult(game));
+        String result = gs.showResult(game);
+        System.out.println(result);
+
         RecordingResults rr = new RecordingResults();
+        File file= new File(rr.fileNameGenerator(name));
+        rr.appendToFile(file, result);
 
-        OutputStream outputStream =
-                new FileOutputStream(rr.fileNameGenerator(name));
-
-        String str = gs.showResult(game);
-        outputStream.write(str.getBytes(StandardCharsets.UTF_8));
-        outputStream.close();
         cs.close();
     }
 }
