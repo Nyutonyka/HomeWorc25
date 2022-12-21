@@ -3,10 +3,7 @@ package com.hillel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,7 +13,15 @@ public class ConverJsonInYaml implements FileFormatConversion{
 
     @Override
     public List<String> getFilePath(Path path) throws IOException{
-        return List.of(path.toFile().list());
+
+        File f = new File(String.valueOf(path));
+        List<String> filePath = null;
+        if (f.isDirectory()) {
+            filePath = Arrays.asList(path.toFile().list());
+        } else {
+            filePath = new ArrayList<>();
+        }
+        return filePath;
     }
 
     @Override
@@ -31,20 +36,27 @@ public class ConverJsonInYaml implements FileFormatConversion{
     }
 
     @Override
-    public long fileConvert(Path path)throws IOException{
+    public long fileConvert(Path path) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        Map[] obj =  mapper.readValue(new File(String.valueOf(path)), Map[].class);
+        Map[] obj = mapper.readValue(new File(String.valueOf(path)), Map[].class);
         //System.out.println(obj);
         Yaml yaml = new Yaml();
         String t = yaml.dump(obj);
-       // System.out.println(t);
-        String s =  Paths.get("").toAbsolutePath().toString();
+        // System.out.println(t);
+        String s = Paths.get("").toAbsolutePath().toString();
         String fileName = "src/main/java/com/hillel/convertet/User_Data.yaml";
         File file = new File(s, File.separator.concat(fileName));
+        try {
+            OutputStream outputStream =
+                    new FileOutputStream(file, false);
+            outputStream.write(t.getBytes(StandardCharsets.UTF_8));
 
-        OutputStream outputStream =
-                new FileOutputStream(file, false);
-        outputStream.write(t.getBytes(StandardCharsets.UTF_8));
+        } catch (
+                FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         long size = file.length();
         return size;
     }

@@ -18,9 +18,17 @@ import java.util.stream.Stream;
 import static java.lang.String.valueOf;
 
 public class ConverYamlInJson implements FileFormatConversion{
+
     @Override
     public List<String> getFilePath(Path path) throws IOException {
-        return List.of(path.toFile().list());
+        File f = new File(String.valueOf(path));
+        List<String> filePath = null;
+        if (f.isDirectory()) {
+            filePath = Arrays.asList(path.toFile().list());
+        } else {
+            filePath = new ArrayList<>();
+        }
+        return filePath;
     }
 
     @Override

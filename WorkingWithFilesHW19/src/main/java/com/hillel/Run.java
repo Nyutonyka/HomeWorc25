@@ -19,6 +19,7 @@ public class Run {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter directory path...");
         String folderPath = sc.nextLine();
+        sc.close();
 
         //получаем  виде аргумента программы расположение директории где находятся файлы
         Path path = Path.of(Paths.get(folderPath).toAbsolutePath().toString());
@@ -32,7 +33,7 @@ public class Run {
         }
 
         //получаем расположение директории где находится файл JSON
-        Path path1 = Path.of(path + "/" + fValidPath);
+        Path path1 = Path.of(String.valueOf(path), File.separator.concat(fValidPath));
 
         //конвертируем файл Json --> Yaml, сохраняем полученный файл в папке converted
         long start = System.currentTimeMillis();
