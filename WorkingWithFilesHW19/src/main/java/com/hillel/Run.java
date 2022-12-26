@@ -3,76 +3,75 @@ package com.hillel;
  * @author Anna Babich
  * @version 1.0.0
  */
+import com.hillel.service.ConverterService;
+import com.hillel.service.FileService;
+import com.hillel.service.impl.FileServiceImpl;
+import com.hillel.service.impl.JsonConverterServiceImpl;
+import com.hillel.service.impl.YamlConverterServiceImpl;
+
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
-import java.util.Scanner;
+
 
 public class Run {
+
+    private final static String JSON = "json";
+    private final static String YAML = "yaml";
+
     public static void main(String[] args) throws IOException {
 
-        FileFormatConversion jsonInYaml = new ConverJsonInYaml();
-        FileFormatConversion yamlInJson = new ConverYamlInJson();
-
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter directory path...");
-        String folderPath = sc.nextLine();
-        sc.close();
-
-        //получаем  виде аргумента программы расположение директории где находятся файлы
-        Path path = Path.of(Paths.get(folderPath).toAbsolutePath().toString());
-        List<String> filesPath = jsonInYaml.getFilePath(path);
-
-        //валидируем формат (YAML, JSON) оставляя JSON
-        List<String> fileValidPath = jsonInYaml.getFileValidPath(filesPath).stream().toList();
-        String fValidPath = null;
-        for (String s : fileValidPath) {
-            fValidPath = s;
+        Path path = Path.of(System.getProperty("user.dir"));
+        if (args.length > 0) {
+            path = Path.of(args[0]);
         }
+        System.out.println(path);
 
-        //получаем расположение директории где находится файл JSON
-        Path path1 = Path.of(String.valueOf(path), File.separator.concat(fValidPath));
+        FileService fs = new FileServiceImpl();
+        List<File> filePath = fs.getFilesPath(path);
 
-        //конвертируем файл Json --> Yaml, сохраняем полученный файл в папке converted
-        long start = System.currentTimeMillis();
-        long size1 = jsonInYaml.fileConvert(path1)/1024;
-        long finish = System.currentTimeMillis();
-        long elapsed = finish - start;
+        List<File> fileValidPath = fs.getFileValidPath(filePath, List.of("json","yaml"));
 
-        File file = new File(String.valueOf(path1));
-        long size = file.length()/1024;
+        ConverterService json = new JsonConverterServiceImpl();
+        ConverterService yaml = new YamlConverterServiceImpl();
 
-        String content = "file.json -> file.yaml; "+ elapsed + " mc; old size " +
-                size + "kb, new size " + size1 + "kb\n";
 
-        //результаты конвертации сохраняем в файле result.log
-        System.out.println(jsonInYaml.saveResult(content));
+        File fileDir = new File(path.toString(), "/convert");
+        fileDir.mkdir();
 
-        //валидируем формат (YAML, JSON) оставляя YAML
-        List<String> fileValidPathY = yamlInJson.getFileValidPath(filesPath).stream().toList();
-        String fValidPathY = null;
-        for (String s : fileValidPathY) {
-            fValidPathY = s;
+        for (File file : fileValidPath) {
+            if (fs.isFileFormat(file, YAML)) {
+                long startTime = System.nanoTime();
+                long yamlSize = Files.size(file.toPath())/1024;
+                String str = yaml.convert(fs.readFromFile(file.toPath()));
+                File destinationFile = new File(fileDir, fs.getFileName(file) + ".json");
+                destinationFile.getName();
+                fs.saveToFile(destinationFile, false, str);
+                long jsonSize = Files.size(destinationFile.toPath())/1024;
+                long duration = (System.nanoTime() - startTime)/1000000;
+                String result = "file.yaml -> file.json; " + duration + " mc; old size " +
+                        yamlSize + "kb, new size " + jsonSize + "kb\n";
+                System.out.println(result);
+
+                fs.saveToFile(new File(path.toString(), "log.txt"), true, result);
+
+            } else if (fs.isFileFormat(file, JSON)) {
+                long startTime = System.nanoTime();
+                long jsonSize = Files.size(file.toPath())/1024;
+                String str = json.convert(fs.readFromFile(file.toPath()));
+                File destinationFile = new File(fileDir, fs.getFileName(file) + ".yaml");
+                fs.saveToFile(destinationFile, false, str);
+                long yamlSize = Files.size(destinationFile.toPath())/1024;
+                fs.saveToFile(destinationFile, false, str);
+                long duration = (System.nanoTime() - startTime)/1000000;
+                String result = "file.json -> file.yaml; " + duration + " mc; old size " +
+                        jsonSize + "kb, new size " + yamlSize + "kb\n";
+                System.out.println(result);
+
+                fs.saveToFile(new File(path.toString(), "log.txt"), true, result);
+            }
         }
-
-        //получаем расположение директории где находится файл YAML
-        Path path1Y = Path.of(path + "/" + fValidPathY);
-
-        //конвертируем файл Yaml --> Json, сохраняем полученный файл в папке converted
-        long startY = System.currentTimeMillis();
-        long size1Y = yamlInJson.fileConvert(path1Y)/1024;
-        long finishY = System.currentTimeMillis();
-        long elapsedY = finishY - startY;
-
-        File fileY = new File(String.valueOf(path1Y));
-        long sizeY = fileY.length()/1024;
-
-        String contentY = "file.yaml -> file.json; "+ elapsedY + " mc; old size " +
-                sizeY + "kb, new size " + size1Y + "kb\n";
-
-        //результаты конвертации сохраняем в файле result.log
-        System.out.println(jsonInYaml.saveResult(contentY));
     }
 }

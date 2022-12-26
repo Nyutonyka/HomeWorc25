@@ -1,0 +1,16 @@
+file.json -> file.yaml; 462056900 mc; old size 127523kb, new size 134569kb
+file.yaml -> file.json; 182133600 mc; old size 124kb, new size 169kb
+file.json -> file.yaml; 465144700 mc; old size 124kb, new size 131kb
+file.yaml -> file.json; 188803800 mc; old size 124kb, new size 169kb
+file.json -> file.yaml; 457 mc; old size 124kb, new size 131kb
+file.yaml -> file.json; 189577400 mc; old size 124kb, new size 169kb
+file.json -> file.yaml; 458 mc; old size 124kb, new size 131kb
+file.yaml -> file.json; 180 mc; old size 124kb, new size 169kb
+file.json -> file.yaml; 450 mc; old size 124kb, new size 131kb
+file.yaml -> file.json; 181 mc; old size 124kb, new size 169kb
+file.json -> file.yaml; 469 mc; old size 124kb, new size 131kb
+file.yaml -> file.json; 183 mc; old size 124kb, new size 169kb
+file.json -> file.yaml; 458 mc; old size 131kb, new size 124kb
+file.yaml -> file.json; 190 mc; old size 124kb, new size 169kb
+file.json -> file.yaml; 468 mc; old size 132kb, new size 124kb
+file.yaml -> file.json; 205 mc; old size 127kb, new size 169kb
