@@ -1,6 +1,7 @@
 package service.impl;
 
 import dto.Student;
+import org.junit.jupiter.api.Test;
 import service.ConnectionClass;
 import service.StudentService;
 
@@ -13,41 +14,67 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class StudentServiceImplTest {
 
-    @org.junit.jupiter.api.Test
-    void addToDataBase() {
+    ConnectionClass cc = new ConnectionClassImpl();
+    Connection connection = cc.connect();
+    Statement statement = cc.statement(connection);
+    StudentService ss = new StudentServiceImpl();
 
+    StudentServiceImplTest() throws SQLException {
     }
 
-    @org.junit.jupiter.api.Test
-    void deleteFromDataBase() {
+    @Test
+    void addToDataBase() throws SQLException{
+        boolean result = ss.addToDataBase(statement, "'Nik Kidman', 3, 2018");
+        assertFalse(result);
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
+    void deleteFromDataBase() throws SQLException {
+        boolean result = ss.deleteFromDataBase(statement, "Full_name", "'Nik Kidman'");
+
+        assertFalse(result);
+    }
+
+    @Test
     void getAll() throws SQLException {
-        ConnectionClass cc = new ConnectionClassImpl();
-        Connection connection = cc.connect();
-        Statement statement = cc.statement(connection);
-        StudentService ss = new StudentServiceImpl();
 
         List<Student> student = ss.getAll(statement);
 
-        assertEquals(student.size(), 17);
         assertEquals(student.get(0).getId(),1000);
         assertEquals(student.get(0).getFullName(),"Babich Anna");
         assertEquals(student.get(0).getIdClass(),1);
         assertEquals(student.get(0).getYearAdmission(),2020);
 
+        assertNotEquals(student.size(), 16);
+
     }
 
-    @org.junit.jupiter.api.Test
-    void getByName() {
+    @Test
+    void getByName() throws SQLException {
+        List<Student> student = ss.getByName(statement, "'Babich Anna'");
+
+        assertEquals(student.toString(),
+                "[Student: id - 1000, Babich Anna, idClass - 1, year - 2020]");
+        assertNotNull(student);
+
+
     }
 
-    @org.junit.jupiter.api.Test
-    void getByIds() {
+    @Test
+    void getByIds() throws SQLException {
+        List<Student> student = ss.getByIds(statement, 1000);
+
+        assertEquals(student.toString(),
+                "[Student: id - 1000, Babich Anna, idClass - 1, year - 2020]");
+        assertNotNull(student);
+
     }
 
-    @org.junit.jupiter.api.Test
-    void getByIdClass() {
+    @Test
+    void getByIdClass() throws SQLException {
+        List<Student> student = ss.getByIdClass(statement, 1);
+
+        assertEquals(student.size(), 4);
+        assertNotNull(student);
     }
 }

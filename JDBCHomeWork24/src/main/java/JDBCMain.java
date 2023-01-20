@@ -11,6 +11,13 @@ import service.impl.StudentServiceImpl;
 import java.sql.*;
 import java.util.List;
 
+/**
+ * @author Anna Babich
+ * @version 1.0.2
+ *
+ * @since version 1.0.0
+ */
+
 public class JDBCMain {
 
     public static void main(String[] args) throws SQLException {
@@ -22,12 +29,13 @@ public class JDBCMain {
         Connection connection = cc.connect();
         Statement statement = cc.statement(connection);
 
-        String data = "create table graduates (\n" +
-                "    id int not null auto_increment,\n" +
-                "    id_students int not null,\n" +
-                "    Name_class varchar(255) not null,\n" +
-                "    primary key (id),\n" +
-                "    foreign key (id_students) references students(ID_student))";
+        String data = """
+                create table graduates (
+                    id int not null auto_increment,
+                    id_students int not null,
+                    Name_class varchar(255) not null,
+                    primary key (id),
+                    foreign key (id_students) references students(ID_student))""";
         System.out.println(dbs.createTable(statement, data));
 
         String name = "graduates";
@@ -43,9 +51,6 @@ public class JDBCMain {
         for (Student s : studentJL)
             System.out.println(s);
         System.out.println(studentJL.size());
-
-//        System.out.println(ss.addToDataBase(statement, "'Nik Kidman', 3, 2018"));
-//        System.out.println(ss.deleteFromDataBase(statement, "Full_name", "'Nik Kidman'"));
 
         List<Student> students = ss.getAll(statement);
         for (Student s : students)

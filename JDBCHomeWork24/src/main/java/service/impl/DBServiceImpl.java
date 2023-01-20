@@ -1,6 +1,7 @@
 package service.impl;
 
 import dto.JoinStudent;
+import lombok.extern.slf4j.Slf4j;
 import service.DBService;
 import service.Joins;
 
@@ -10,14 +11,33 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Anna Babich
+ * @version 1.0.2
+ *
+ * @since version 1.0.0
+ */
+@Slf4j
 public class DBServiceImpl implements DBService {
 
+    /**
+     *
+     * @param statement static SQL statement
+     * @param data script to create tables
+     * @throws SQLException
+     */
     @Override
     public String createTable(Statement statement, String data) throws SQLException {
         statement.execute(data);
         return "Table created.";
     }
 
+    /**
+     *
+     * @param statement static SQL statement
+     * @param name table name
+     * @throws SQLException
+     */
     @Override
     public String deleteTable(Statement statement, String name) throws SQLException {
         statement.execute("drop table " + name);
@@ -25,6 +45,12 @@ public class DBServiceImpl implements DBService {
     }
 
 
+    /**
+     *
+     * @param statement static SQL statement
+     * @param name table name
+     * @throws SQLException
+     */
     @Override
     public void infoTable(Statement statement, String name) throws SQLException {
         ResultSet rs = statement.executeQuery("select * from " + name);
@@ -40,6 +66,13 @@ public class DBServiceImpl implements DBService {
         System.out.println();
     }
 
+    /**
+     *
+     * @param statement static SQL statement
+     * @param joins {@link Joins}
+     * @return union table students and class {@link JoinStudent}
+     * @throws SQLException that provides information on a database
+     */
     @Override
     public List<JoinStudent> getJoin(Statement statement, Joins joins) throws SQLException {
         ResultSet rs = statement.executeQuery
