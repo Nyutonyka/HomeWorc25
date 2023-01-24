@@ -3,8 +3,12 @@ package com.hillel.servis.impl;
 import com.hillel.dto.*;
 import com.hillel.servis.GameService;
 import com.hillel.servis.HandSigns;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class GameServiceImpl implements GameService {
+
+    private static final Logger play = LoggerFactory.getLogger("play");
 
     private static final HandSigns hs = new HandSignsImpl();
 
@@ -37,35 +41,44 @@ public class GameServiceImpl implements GameService {
         Signs plHand = game.getPlayer().getSigns();
         Signs cmHand = game.getComputer().getSigns();
 
-        System.out.println("Player: " + plHand);
-        System.out.println("Computer: " + cmHand);
+        //System.out.println("Player: " + plHand);
+        play.info("Player: " + plHand);
+       // System.out.println("Computer: " + cmHand);
+        play.info("Computer: " + cmHand);
 
         if (plIndex == 1 && cmIndex == 2) {
-            System.out.println("Player");
+           // System.out.println("Player");
+            play.info("Player");
             game.getPlayer().setNumberOfGamesPlayed(game.getPlayer().getNumberOfGamesPlayed() + 1);
             game.getPlayer().setNumberOfWins(game.getPlayer().getNumberOfWins() + 1);
         } else if (plIndex == 1 && cmIndex == 3) {
-            System.out.println("Computer");
+           // System.out.println("Computer");
+            play.info("Computer");
             game.getPlayer().setNumberOfGamesPlayed(game.getPlayer().getNumberOfGamesPlayed() + 1);
             game.getPlayer().setNumberOfLosses(game.getPlayer().getNumberOfLosses() + 1);
         } else if (plIndex == 2 && cmIndex == 1) {
-            System.out.println("Computer");
+            //System.out.println("Computer");
+            play.info("Computer");
             game.getPlayer().setNumberOfGamesPlayed(game.getPlayer().getNumberOfGamesPlayed() + 1);
             game.getPlayer().setNumberOfLosses(game.getPlayer().getNumberOfLosses() + 1);
         } else if (plIndex == 2 && cmIndex == 3) {
-            System.out.println("Player");
+           // System.out.println("Player");
+            play.info("Player");
             game.getPlayer().setNumberOfGamesPlayed(game.getPlayer().getNumberOfGamesPlayed() + 1);
             game.getPlayer().setNumberOfWins(game.getPlayer().getNumberOfWins() + 1);
         } else if (plIndex == 3 && cmIndex == 1) {
-            System.out.println("Player");
+            //System.out.println("Player");
+            play.info("Player");
             game.getPlayer().setNumberOfGamesPlayed(game.getPlayer().getNumberOfGamesPlayed() + 1);
             game.getPlayer().setNumberOfWins(game.getPlayer().getNumberOfWins() + 1);
         } else if (plIndex == 3 && cmIndex == 2) {
-            System.out.println("Computer");
+            //System.out.println("Computer");
+            play.info("Computer");
             game.getPlayer().setNumberOfGamesPlayed(game.getPlayer().getNumberOfGamesPlayed() + 1);
             game.getPlayer().setNumberOfLosses(game.getPlayer().getNumberOfLosses() + 1);
         } else if (plIndex == cmIndex) {
-            System.out.println("Draw");
+           // System.out.println("Draw");
+            play.info("Draw");
             game.getPlayer().setNumberOfGamesPlayed(game.getPlayer().getNumberOfGamesPlayed() + 1);
             game.getPlayer().setNumberOfDraw(game.getPlayer().getNumberOfDraw() + 1);
         }
