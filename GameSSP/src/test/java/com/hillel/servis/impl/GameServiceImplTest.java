@@ -6,6 +6,9 @@ import com.hillel.dto.Game;
 import com.hillel.servis.GameService;
 import org.junit.jupiter.api.Test;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -55,10 +58,13 @@ class GameServiceImplTest {
         Player pl = new Player();
         GameService gs = new GameServiceImpl();
         Game game = gs.startGame(pl, cm);
+        Locale defLocale = Locale.getDefault();
 
-        gs.showWinner(game);
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("message", defLocale);
+
+        gs.showWinner(game, resourceBundle);
         assertEquals(1, game.getPlayer().getNumberOfGamesPlayed());
-        gs.showWinner(game);
+        gs.showWinner(game, resourceBundle);
         assertEquals(2, game.getPlayer().getNumberOfGamesPlayed());
     }
 }

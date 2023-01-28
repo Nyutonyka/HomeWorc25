@@ -3,6 +3,8 @@ package com.hillel;
  * @author Anna Babich
  * @version 1.0.1
  */
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import com.hillel.dto.*;
@@ -17,10 +19,16 @@ public class StartGame {
     private static final Logger logger = LoggerFactory.getLogger("stdout");
 
     public static void main(String[] args)  {
+        Locale defLocale = Locale.getDefault();
+        if (args.length != 0){
+            defLocale = new Locale(args[0]);
+        }
+
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("message", defLocale);
         Scanner cs = new Scanner(System.in);
-        logger.info("Enter your name ...");
+        logger.info(resourceBundle.getString("name"));
         String name = cs.nextLine();
-        logger.info("Enter number of games ...");
+        logger.info(resourceBundle.getString("numberOfGames"));
         int numberOfGames = cs.nextInt();
         cs.nextLine();
 
@@ -28,18 +36,18 @@ public class StartGame {
         Game game = gs.startGame(new Player()
                 .setName(name), new Computer());
 
-        String nextGame = "Y";
+        String nextGame = resourceBundle.getString("next");
 
         do {
             gs.playerHand(game);
             gs.computerHand(game);
-            gs.showWinner(game);
+            gs.showWinner(game, resourceBundle);
             if (--numberOfGames == 0) break;
-            logger.info("Next game ... [Y/N]");
+            logger.info(resourceBundle.getString("nextGame"));
             nextGame = cs.nextLine();
-        } while (nextGame.equalsIgnoreCase("y"));
+        } while (nextGame.equalsIgnoreCase(resourceBundle.getString("next")));
 
-        String resultPlay = gs.showResult(game);
+        String resultPlay = gs.showResult(game, resourceBundle);
         logger.info(resultPlay);
         result.info(resultPlay);
 
