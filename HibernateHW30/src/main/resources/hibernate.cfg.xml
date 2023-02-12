@@ -9,9 +9,9 @@
 		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 
 		<!-- Assume hibernate is the database name -->
-		<property name="connection.url">jdbc:mysql://localhost:3306/hibernate?serverTimezone=UTC</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/hillel?serverTimezone=UTC</property>
 		<property name="connection.username">root</property>
-		<property name="connection.password">rootroot</property>
+		<property name="connection.password">root</property>
 
 		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>
@@ -31,16 +31,7 @@
 		<property name="connection.pool_size">10</property>
 		<property name="current_session_context_class">thread</property>
 
-		<mapping class="com.home.hibernate.entity.Person" />
-		<mapping class="com.home.hibernate.entity.Vehicle" />
-		<mapping class="com.home.hibernate.entity.Phone" />
-		<mapping class="com.home.hibernate.entity.House" />
-		<mapping class="com.home.hibernate.entity.Owner" />
-		<mapping class="com.home.hibernate.entity.CarOwner" />
-		<mapping class="com.home.hibernate.entity.Car" />
-		<mapping class="com.home.hibernate.entity.TwoWheeler" />
-		<mapping class="com.home.hibernate.entity.FourWheeler" />
-
+		<mapping class="entity.Student" />
 
 	</session-factory>
 </hibernate-configuration>

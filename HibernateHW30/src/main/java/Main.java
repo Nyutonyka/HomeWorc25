@@ -1,79 +1,44 @@
-import dto.JoinStudent;
-import dto.Student;
-import service.ConnectionClass;
-import service.DBService;
-import service.Joins;
+import entity.Student;
+import org.hibernate.Session;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import service.StudentService;
-import service.impl.ConnectionClassImpl;
-import service.impl.DBServiceImpl;
+import service.impl.HibernateUtil;
 import service.impl.StudentServiceImpl;
-
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.List;
 
 /**
  * @author Anna Babich
- * @version 1.0.2
+ * @version 1.0.0
  *
  * @since version 1.0.0
  */
 
 public class Main {
 
-    public static void main(String[] args) throws SQLException {
+    private static final Logger logger = LoggerFactory.getLogger("stdout");
+
+    public static void main(String[] args){
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Student student = new Student("Ben", "Babich", 2, 2010);
+        Student student1 = new Student("Anna", "Babich", 2, 2010);
+        Student student2 = new Student("Don", "Babich", 2, 2010);
 
         StudentService ss = new StudentServiceImpl();
-        DBService dbs = new DBServiceImpl();
-        ConnectionClass cc = new ConnectionClassImpl();
+        ss.addToDataBase(session, student);
+        ss.addToDataBase(session, student1);
+        ss.addToDataBase(session, student2);
 
-        Connection connection = cc.connect();
-        Statement statement = cc.statement(connection);
+        ss.deleteFromDataBase(session, 3L);
 
-        String data = """
-                create table graduates (
-                    id int not null auto_increment,
-                    id_students int not null,
-                    Name_class varchar(255) not null,
-                    primary key (id),
-                    foreign key (id_students) references students(ID_student))""";
-        System.out.println(dbs.createTable(statement, data));
+        Student studentId = ss.getByIds(session, 1L);
+        logger.info(String.valueOf(studentId));
 
-        String name = "graduates";
-        System.out.println(dbs.deleteTable(statement, name));
+        ss.getAll(session);
 
-        String nameTable = "students";
-        dbs.infoTable(statement, nameTable);
-        nameTable = "class";
-        dbs.infoTable(statement, nameTable);
+        ss.getByName(session, "Anna");
 
-        Joins joins =  Joins.LEFT;
-        List<JoinStudent> studentJL = dbs.getJoin(statement, joins);
-        for (Student s : studentJL)
-            System.out.println(s);
-        System.out.println(studentJL.size());
-
-        List<Student> students = ss.getAll(statement);
-        for (Student s : students)
-            System.out.println(s);
-        System.out.println(students.size());
-
-        List<Student> student = ss.getByName(statement,"'Babich Anna'");
-        for (Student s : student)
-            System.out.println(s);
-        System.out.println(student.size());
-
-        List<Student> studentId = ss.getByIds(statement, 1005);
-        for (Student s : studentId)
-            System.out.println(s);
-        System.out.println(studentId.size());
-
-        List<Student> studentIdClass = ss.getByIdClass(statement, 2);
-        for (Student s : studentIdClass)
-            System.out.println(s);
-        System.out.println(studentIdClass.size());
-
-        cc.closeConnect(connection);
+        session.close();
     }
 }

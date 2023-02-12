@@ -1,15 +1,16 @@
 package service.impl;
 
-import dto.Student;
+import entity.Student;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.*;
+import org.hibernate.criterion.Restrictions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import service.StudentService;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+import org.hibernate.Session;
+import java.io.Serializable;
 import java.util.List;
-
 
 /**
  * @author Anna Babich
@@ -20,110 +21,93 @@ import java.util.List;
 @Slf4j
 public class StudentServiceImpl implements StudentService {
 
+    private static final Logger result = LoggerFactory.getLogger("result");
+    private static final Logger logger = LoggerFactory.getLogger("stdout");
+
     /**
      *
-     * @param statement static SQL statement
-     * @param values data student (Full_name, Class, Year_admission)
+     * @param session SessionFactory Hibernate
+     * @param student data student (Full_name, Class, Year_admission)
      *
      */
     @Override
-    public boolean addToDataBase(Statement statement, String values) throws SQLException {
-        return statement.execute("insert into students " +
-                "(Full_name, Class, Year_admission) " +
-                "values (" + values + ")");
+    public void addToDataBase(Session session, Student student) {
+        session.beginTransaction();
+        session.save(student);
+        session.getTransaction().commit();
+        result.info("Object Student add to Data Base");
+    }
+    /**
+     *
+     * @param session SessionFactory Hibernate
+     * @param serializable id Student
+     *
+     */
+    @Override
+    public void deleteFromDataBase(Session session, Serializable serializable) {
+        session.beginTransaction();
+        session.delete(session.get( Student.class, serializable ));
+        session.getTransaction().commit();
+        result.info("Object Student delete from Data Base");
     }
 
     /**
      *
-     * @param statement static SQL statement
-     * @param column name column from Table students
-     * @param values data from colum on Table
+     * @param session SessionFactory Hibernate
      *
      */
     @Override
-    public boolean deleteFromDataBase(Statement statement, String column, String values) throws SQLException{
-        return statement.execute("delete from students where " +
-                column + "=" + values);
-    }
+    public List<Student> getAll(Session session){
+        session.beginTransaction();
 
-    /**
-     *
-     * @param statement static SQL statement
-     *
-     */
-    @Override
-    public List<Student> getAll(Statement statement) throws SQLException {
-        ResultSet rs = statement.executeQuery("select * from students");
-        List<Student> student = new ArrayList<>();
-        while (rs.next()) {
-            int id = rs.getInt("ID_student");
-            String fullName = rs.getString("Full_name");
-            int idClass = rs.getInt("Class");
-            int yearAdmission = rs.getInt("Year_admission");
-            student.add(new Student(id, fullName, idClass, yearAdmission));
+        String sql = "From " + Student.class.getSimpleName();
+        logger.info("sql = " + sql);
+
+        List<Student> students = session.createQuery(sql).list();
+
+        logger.info("students.size = " + students.size());
+        for (Student student : students) {
+            logger.info(student.toString());
         }
-        return student;
+
+        session.getTransaction().commit();
+        return students;
     }
 
     /**
      *
-     * @param statement static SQL statement
+     * @param session SessionFactory Hibernate
      * @param name full name student
      *
      */
     @Override
-    public List<Student> getByName(Statement statement, String name) throws SQLException {
-        ResultSet rs = statement.executeQuery
-                ("select * from students where Full_name = " + name);
-        List<Student> student = new ArrayList<>();
-        while (rs.next()) {
-            int id = rs.getInt("ID_student");
-            String fullName = rs.getString("Full_name");
-            int idClass = rs.getInt("Class");
-            int yearAdmission = rs.getInt("Year_admission");
-            student.add(new Student(id, fullName, idClass, yearAdmission));
+    public List<Student> getByName(Session session, String name){
+        session.beginTransaction();
+
+        Criteria criteria = session.createCriteria(Student.class)
+                .add(Restrictions.eq("name", name));
+        List<Student> students = criteria.list();
+
+        for (Student student : students) {
+            logger.info(student.toString());
         }
-        return student;
+        session.getTransaction().commit();
+        return students;
     }
 
     /**
      *
-     * @param statement static SQL statement
-     * @param ids identification student
+     * @param session vSessionFactory Hibernate
+     * @param serializable id Student
      *
      */
     @Override
-    public List<Student> getByIds(Statement statement, int ids) throws SQLException {
-        ResultSet rs = statement.executeQuery
-                ("select * from students where ID_student = " + ids);
-        List<Student> student = new ArrayList<>();
-        while (rs.next()) {
-            int id = rs.getInt("ID_student");
-            String fullName = rs.getString("Full_name");
-            int idClass = rs.getInt("Class");
-            int yearAdmission = rs.getInt("Year_admission");
-            student.add(new Student(id, fullName, idClass, yearAdmission));
-        }
-        return student;
-    }
+    public Student getByIds(Session session, Serializable serializable){
+        session.beginTransaction();
+        Student student;
+        student = (Student) session.get(Student.class,serializable );
+        session.getTransaction().commit();
 
-    /**
-     *
-     * @param statement static SQL statement
-     * @param idc identification class
-     *
-     */
-    public List<Student> getByIdClass(Statement statement, int idc) throws SQLException {
-        ResultSet rs = statement.executeQuery
-                ("select * from students where Class = " + idc);
-        List<Student> student = new ArrayList<>();
-        while (rs.next()) {
-            int id = rs.getInt("ID_student");
-            String fullName = rs.getString("Full_name");
-            int idClass = rs.getInt("Class");
-            int yearAdmission = rs.getInt("Year_admission");
-            student.add(new Student(id, fullName, idClass, yearAdmission));
-        }
         return student;
     }
 }
