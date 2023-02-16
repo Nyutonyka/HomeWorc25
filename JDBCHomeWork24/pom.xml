@@ -90,7 +90,7 @@
                     <configuration>
                         <archive>
                             <manifest>
-                                <mainClass>com.hillel.JDBCMain</mainClass>
+                                <mainClass>com.hillel.Main</mainClass>
                             </manifest>
                         </archive>
                     </configuration>

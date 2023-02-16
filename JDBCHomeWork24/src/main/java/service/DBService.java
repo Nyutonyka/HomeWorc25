@@ -1,7 +1,6 @@
 package service;
 
 import dto.JoinStudent;
-import dto.Student;
 
 import java.sql.SQLException;
 import java.sql.Statement;

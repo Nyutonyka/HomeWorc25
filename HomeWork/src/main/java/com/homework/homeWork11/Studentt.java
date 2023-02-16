@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode
 @ToString
 @Accessors(chain = true)
-public class Student {
+public class Studentt {
     private long id;
     private String name;
     @EqualsAndHashCode.Exclude

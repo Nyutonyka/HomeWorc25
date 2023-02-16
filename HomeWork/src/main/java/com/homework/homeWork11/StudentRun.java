@@ -4,7 +4,7 @@ public class StudentRun {
 
     public static void main(String[] args) {
 
-        Student st = new Student();
+        Studentt st = new Studentt();
         st.setId(1);
         st.setName("Ann");
         st.setLastName("Daniel");
@@ -15,7 +15,7 @@ public class StudentRun {
         //можно сократить создание класса до одной строчки
         //с помощью @Accessors(chain = true)
 
-        Student stA = new Student()
+        Studentt stA = new Studentt()
                 .setId(2).setName("Ann").setLastName("Daniel").setAge(25);
 
         System.out.println(stA);

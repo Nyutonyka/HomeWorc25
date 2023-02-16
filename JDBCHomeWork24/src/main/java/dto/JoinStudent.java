@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-public class JoinStudent extends Student{
+public class JoinStudent extends Student {
 
     @Setter
     @Getter
