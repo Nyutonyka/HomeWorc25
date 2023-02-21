@@ -1,6 +1,6 @@
 package service.impl;
 
-import dto.JoinStudent;
+import entity.JoinStudent;
 import lombok.extern.slf4j.Slf4j;
 import service.DBService;
 import service.Joins;

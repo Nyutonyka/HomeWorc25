@@ -1,6 +1,6 @@
 package service;
 
-import dto.Student;
+import entity.Student;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;

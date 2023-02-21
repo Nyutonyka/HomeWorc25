@@ -1,6 +1,6 @@
 package service.impl;
 
-import dto.Class;
+import entity.Class;
 import service.ClassService;
 
 import java.sql.ResultSet;

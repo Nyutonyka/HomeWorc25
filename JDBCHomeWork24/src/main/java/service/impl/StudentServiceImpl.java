@@ -1,6 +1,6 @@
 package service.impl;
 
-import dto.Student;
+import entity.Student;
 import lombok.extern.slf4j.Slf4j;
 import service.StudentService;
 

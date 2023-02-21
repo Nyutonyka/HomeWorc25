@@ -1,4 +1,4 @@
-package entity;
+package hillel.entity;
 
 import javax.persistence.*;
 
@@ -20,27 +20,19 @@ public class Student {
     @Column(name = "Last_Name")
     private String lustName;
 
-    @Column(name = "Id_Class")
-    private int idClass;
-
-    @Column(name = "Year_Admission")
-    private int yearAdmission;
 
     public Student() {
     }
 
-    public Student(int id, String name, String lastName, int yearAdmission) {
+    public Student(String name, String lastName) {
+        this.name = name;
+        this.lustName = lastName;
+    }
+
+    public Student(int id, String name, String lastName) {
         this.id = id;
         this.name = name;
         this.lustName = lastName;
-        this.yearAdmission = yearAdmission;
-    }
-
-    public Student(String name, String lastName,  int idClass, int yearAdmission) {
-        this.name = name;
-        this.idClass = idClass;
-        this.lustName = lastName;
-        this.yearAdmission = yearAdmission;
     }
 
     public long getId() {
@@ -67,21 +59,6 @@ public class Student {
         this.lustName = lustName;
     }
 
-    public int getIdClass() {
-        return idClass;
-    }
-
-    public void setIdClass(int idClass) {
-        this.idClass = idClass;
-    }
-
-    public int getYearAdmission() {
-        return yearAdmission;
-    }
-
-    public void setYearAdmission(int yearAdmission) {
-        this.yearAdmission = yearAdmission;
-    }
 
     @Override
     public String toString() {
@@ -89,8 +66,6 @@ public class Student {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", lustName='" + lustName + '\'' +
-                ", idClass=" + idClass +
-                ", yearAdmission=" + yearAdmission +
                 '}';
     }
 }

@@ -1,10 +1,12 @@
-import entity.Student;
+package hillel;
+
+import hillel.entity.Student;
 import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import service.StudentService;
-import service.impl.HibernateUtil;
-import service.impl.StudentServiceImpl;
+import hillel.service.StudentService;
+import hillel.service.impl.HibernateUtil;
+import hillel.service.impl.StudentServiceImpl;
 
 /**
  * @author Anna Babich

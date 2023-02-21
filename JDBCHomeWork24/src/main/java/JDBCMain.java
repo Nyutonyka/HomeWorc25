@@ -1,5 +1,5 @@
-import dto.JoinStudent;
-import dto.Student;
+import entity.JoinStudent;
+import entity.Student;
 import service.ConnectionClass;
 import service.DBService;
 import service.Joins;

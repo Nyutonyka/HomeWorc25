@@ -1,4 +1,4 @@
-package service.impl;
+package hillel.service.impl;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

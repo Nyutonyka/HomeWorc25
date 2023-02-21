@@ -1,6 +1,7 @@
-package service;
+package hillel.service;
 
-import entity.Student;
+
+import hillel.entity.Student;
 import org.hibernate.Session;
 
 import java.io.Serializable;

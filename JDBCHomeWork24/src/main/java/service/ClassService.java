@@ -1,6 +1,6 @@
 package service;
 
-import dto.Class;
+import entity.Class;
 
 import java.sql.SQLException;
 import java.sql.Statement;

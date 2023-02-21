@@ -1,6 +1,6 @@
 package service.impl;
 
-import dto.Student;
+import entity.Student;
 import org.junit.jupiter.api.Test;
 import service.ConnectionClass;
 import service.StudentService;

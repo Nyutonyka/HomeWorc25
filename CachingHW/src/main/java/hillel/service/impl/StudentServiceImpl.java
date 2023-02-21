@@ -1,14 +1,14 @@
-package service.impl;
+package hillel.service.impl;
 
-import entity.Student;
+import hillel.entity.Student;
+import hillel.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.*;
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import service.StudentService;
 
-import org.hibernate.Session;
 import java.io.Serializable;
 import java.util.List;
 

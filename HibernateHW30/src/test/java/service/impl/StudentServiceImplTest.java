@@ -1,12 +1,13 @@
 package service.impl;
 
-import entity.Student;
+import hillel.entity.Student;
+import hillel.service.impl.StudentServiceImpl;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import service.StudentService;
+import hillel.service.StudentService;
 
 import java.util.List;
 
