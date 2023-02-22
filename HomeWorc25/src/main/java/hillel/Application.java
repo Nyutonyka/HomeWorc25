@@ -1,7 +1,6 @@
 package hillel;
 
-import hillel.service.CacheUsage;
-import hillel.service.impl.CacheUsageImpl;
+import hillel.service.CacheUsageImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -16,7 +15,34 @@ public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
 
-        CacheUsage cu = new CacheUsageImpl();
-        System.out.println(cu.put("cache_string", "citys", " Киев, Харьков, Одесса, Днепр"));
+//        CacheUsageImpl cacheUsage = new CacheUsageImpl();
+//
+//        System.out.println(cacheUsage.put("cache", "t", "ttttttttttttttttt"));
+//        System.out.println(cacheUsage.put("cache", "h", "dddddddddddd"));
+//        System.out.println(cacheUsage.put("ca", "h", "dddddddddddd"));
+//        System.out.println(cacheUsage.put("ca", "h", "dddddddddddd"));
+
+//        System.out.println(cacheUsage.get("cache", "t"));
+//        System.out.println(cacheUsage.get("cache", "k"));
+//        System.out.println(cacheUsage.get("ca", "h"));
+//        System.out.println(cacheUsage.get("ca", "k"));
+//
+//        cacheUsage.clear();
+//
+//        System.out.println(cacheUsage.put("cache", "t", "ttttttttttttttttt"));
+//        System.out.println(cacheUsage.put("cache", "h", "dddddddddddd"));
+//        System.out.println(cacheUsage.put("ca", "h", "dddddddddddd"));
+//        System.out.println(cacheUsage.put("ca", "h", "dddddddddddd"));
+//
+//        cacheUsage.isCacheExist("ca");
+//
+//        cacheUsage.clear("ca");
+//
+//        cacheUsage.isCacheExist("ca");
+//
+//        System.out.println(cacheUsage.get("ca", "k"));
+//        System.out.println(cacheUsage.get("ca", "h"));
+//
+//        cacheUsage.isCacheExist("bbb");
     }
 }
