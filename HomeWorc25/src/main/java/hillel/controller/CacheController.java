@@ -4,6 +4,11 @@ import hillel.service.CacheUsageImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+/**
+ * @author Anna Babich
+ * @version 1.0.0
+ *
+ */
 
 @RestController
 @RequestMapping("/api/v1")

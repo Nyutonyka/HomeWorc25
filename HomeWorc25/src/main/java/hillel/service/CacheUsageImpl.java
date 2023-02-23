@@ -4,6 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+/**
+ * @author Anna Babich
+ * @version 1.0.0
+ *
+ */
 
 @Service
 @Slf4j
@@ -13,30 +18,21 @@ public class CacheUsageImpl {
     HashMap<String, String> valueCache;
 
 
-    public void putValue(String key, String value) {
-        if (valueCache == null){
-            valueCache = new HashMap<>();
-            valueCache.put(key, value);
-        }
-        valueCache.put(key, value);
-    }
-
-
     public boolean put(String cacheKey, String key, String value) {
         try {
-        if (valueCache == null){
-            valueCache = new HashMap<>();
+            if (valueCache == null) {
+                valueCache = new HashMap<>();
+                valueCache.put(key, value);
+            }
             valueCache.put(key, value);
-        }
-        valueCache.put(key, value);
-        if (cacheMap == null){
-            cacheMap = new HashMap<>();
+            if (cacheMap == null) {
+                cacheMap = new HashMap<>();
+                cacheMap.put(cacheKey, valueCache);
+            }
             cacheMap.put(cacheKey, valueCache);
-        }
-        cacheMap.put(cacheKey, valueCache);
-        log.info(String.valueOf(valueCache.size()));
-        log.info(String.valueOf(cacheMap.size()));
-        return true;
+            log.info(String.valueOf(valueCache.size()));
+            log.info(String.valueOf(cacheMap.size()));
+            return true;
         } catch (Exception e) {
             System.out.println("Object not added to cache");
             throw new RuntimeException(e);
@@ -44,14 +40,10 @@ public class CacheUsageImpl {
     }
 
     public String get(String cache, String key) {
-        try {
-            if (cache != null && key != null) {
-                return cacheMap.get(cache).get(key);
-            }
-            return null;
-        } catch (Exception e) {
-            System.out.println("null");
-            throw new RuntimeException(e);
+        if(cacheMap.containsKey(cache) && valueCache.containsKey(key)){
+            return cacheMap.get(cache).get(key);
+        }else {
+           return "null";
         }
     }
 
