@@ -3,4 +3,3 @@ MAINTAINER anna
 EXPOSE 3302
 ENV MYSQL_DATABASE=hillel \
     MYSQL_ROOT_PASSWORD=root
-#ADD init.sql /docker-entrypoint-initdb.d

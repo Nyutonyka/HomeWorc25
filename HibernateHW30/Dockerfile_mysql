@@ -2,4 +2,3 @@ FROM mysql:latest
 EXPOSE 3301
 ENV MYSQL_DATABASE=hillel \
     MYSQL_ROOT_PASSWORD=root
-#ADD init.sql /docker-entrypoint-initdb.d
